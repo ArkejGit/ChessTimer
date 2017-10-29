@@ -6,7 +6,10 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.menu}>
-          <Image source={require('./img/chess-timer-logo.png')} />
+          <Image source={require('./img/chess-timer-logo.png')}
+                 style={styles.logo} 
+                 resizeMode={'contain'}
+                 />
         </View>
         <View style={styles.timersContainer}>
           <View style={styles.timersRow}>
@@ -51,10 +54,14 @@ const styles = StyleSheet.create({
   },
   menu: {
     flex: 1,
+    flexDirection: 'column',
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'powderblue'
+    backgroundColor: '#1d1c1a'
+  },  
+  logo: {
+    flex: 0.8
   },
   timersContainer: {
     flex: 6,
