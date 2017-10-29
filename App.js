@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.menu}>
-          <Text>menu</Text>
+          <Image source={require('./img/chess-timer-logo.png')} />
         </View>
         <View style={styles.timersContainer}>
           <View style={styles.timersRow}>
