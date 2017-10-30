@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import Timer from './Timer';
+import { Timer, CustomTimer } from './Timer';
 
 export default class App extends React.Component {
   render() {
@@ -38,7 +38,7 @@ export default class App extends React.Component {
             />
           </View>
           <View style={styles.timersRow}>
-            <Timer 
+            <CustomTimer 
               time='Custom Timer'
             />
           </View>
