@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import Timer from './Timer';
 
 export default class App extends React.Component {
   render() {
@@ -13,31 +14,33 @@ export default class App extends React.Component {
         </View>
         <View style={styles.timersContainer}>
           <View style={styles.timersRow}>
-            <View style={styles.timer}>
-              <Text>timer</Text>
-            </View>
-            <View style={styles.timer}>
-              <Text>timer</Text>
-            </View>
+            <Timer 
+              time='5:00'
+            />
+            <Timer 
+              time='10:00'
+            />
           </View>
           <View style={styles.timersRow}>
-            <View style={styles.timer}>
-              <Text>timer</Text>
-            </View>
-            <View style={styles.timer}>
-              <Text>timer</Text>
-            </View>
+            <Timer 
+              time='15:00'
+            />
+            <Timer 
+              time='20:00'
+            />
           </View>
           <View style={styles.timersRow}>
-            <View style={styles.timer}>
-              <Text>timer</Text>
-            </View>
-            <View style={styles.timer}>
-              <Text>timer</Text>
-            </View>
+            <Timer 
+              time='30:00'
+            />
+            <Timer 
+              time='60:00'
+            />
           </View>
           <View style={styles.timersRow}>
-            <Text>own timer</Text>
+            <Timer 
+              time='Custom Timer'
+            />
           </View>
         </View>
       </View>
@@ -45,10 +48,14 @@ export default class App extends React.Component {
   }
 }
 
+const test = () => {
+  console.log('test');
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F3EFF5',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -58,7 +65,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#1d1c1a'
+    backgroundColor: '#232021'
   },  
   logo: {
     flex: 0.8
@@ -70,13 +77,8 @@ const styles = StyleSheet.create({
   timersRow: {
     flex: 1,
     alignSelf: 'stretch',
-    flexDirection: 'row'
-  },
-  timer: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'black',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });
