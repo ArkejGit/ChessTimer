@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { TimerButton, CustomTimerButton } from './TimerButton';
-import Timer from './Timer';
 
 export default class Home extends React.Component {
 
@@ -24,36 +23,36 @@ export default class Home extends React.Component {
           <View style={styles.timersRow}>
             <TimerButton 
               time='5:00'
+              navigate = {navigate}
             />
             <TimerButton 
               time='10:00'
+              navigate = {navigate}
             />
           </View>
           <View style={styles.timersRow}>
             <TimerButton 
               time='15:00'
+              navigate = {navigate}
             />
             <TimerButton 
               time='20:00'
+              navigate = {navigate}
             />
           </View>
           <View style={styles.timersRow}>
             <TimerButton 
               time='30:00'
+              navigate = {navigate}
             />
             <TimerButton 
               time='60:00'
+              navigate = {navigate}
             />
           </View>
           <View style={styles.timersRow}>
             <CustomTimerButton 
               time='Custom Timer'
-            />
-            <Button
-              onPress={() =>
-                  navigate('Timer')
-                }
-              title="test"
             />
           </View>
         </View>

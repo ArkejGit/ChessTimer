@@ -6,7 +6,9 @@ export class TimerButton extends React.Component {
     return (
       <View style={styles.timer}>
         <TouchableOpacity 
-          style={styles.timerButton}>
+          style={styles.timerButton}
+          onPress={() => {this.props.navigate('Timer')}}
+          >
           <Text style={styles.timerButtonText}>
           {this.props.time}
           </Text>
