@@ -26,31 +26,31 @@ class Home extends React.Component {
         <View style={styles.timersContainer}>
           <View style={styles.timersRow}>          
             <TimerButton 
-              time={'5:00'}
+              time= {300}
               navigate = {navigate}
             />
             <TimerButton 
-              time='10:00'
-              navigate = {navigate}
-            />
-          </View>
-          <View style={styles.timersRow}>
-            <TimerButton 
-              time='15:00'
-              navigate = {navigate}
-            />
-            <TimerButton 
-              time='20:00'
+              time= {600}
               navigate = {navigate}
             />
           </View>
           <View style={styles.timersRow}>
             <TimerButton 
-              time='30:00'
+              time= {900}
               navigate = {navigate}
             />
             <TimerButton 
-              time='60:00'
+              time= {1200}
+              navigate = {navigate}
+            />
+          </View>
+          <View style={styles.timersRow}>
+            <TimerButton 
+              time= {1800}
+              navigate = {navigate}
+            />
+            <TimerButton 
+              time= {3600}
               navigate = {navigate}
             />
           </View>

@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {inject} from 'mobx-react/native'
+
+@inject('store')
 
 export class TimerButton extends React.Component {
   render() {
@@ -7,10 +10,13 @@ export class TimerButton extends React.Component {
       <View style={styles.timer}>
         <TouchableOpacity 
           style={styles.timerButton}
-          onPress={() => {this.props.navigate('Timer')}}
+          onPress={() => {
+            this.props.store.setTime(this.props.time);
+            this.props.navigate('Timer');
+          }}
           >
           <Text style={styles.timerButtonText}>
-          {this.props.time}
+          {getMinutes(this.props.time)}
           </Text>
         </TouchableOpacity>
       </View>
@@ -33,8 +39,8 @@ export class CustomTimerButton extends React.Component {
   }
 }
 
-const test = () => {
-  console.log('test');
+const getMinutes = (time) => {
+  return `${parseInt(time/60) ? parseInt(time/60) : '0'}:${time%60 < 10 ? time%60 + '0' : time%60}`;
 }
 
 const styles = StyleSheet.create({
