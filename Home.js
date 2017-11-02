@@ -9,7 +9,11 @@ import {observer, inject} from 'mobx-react/native'
 class Home extends React.Component {
 
   static navigationOptions = {
-    header: null
+    //header: null,
+     headerStyle: {
+      backgroundColor: '#72B01D',
+      height: 25
+    }
   }
 
   render() {
