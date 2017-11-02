@@ -1,8 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { TimerButton, CustomTimerButton } from './TimerButton';
+import {observer, inject} from 'mobx-react/native'
 
-export default class Home extends React.Component {
+@inject('store')
+
+@observer
+class Home extends React.Component {
 
   static navigationOptions = {
     header: null
@@ -10,19 +14,19 @@ export default class Home extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-
+    
     return (
       <View style={styles.container}>
         <View style={styles.menu}>
           <Image source={require('./img/chess-timer-logo.png')}
                  style={styles.logo} 
                  resizeMode={'contain'}
-                 />
+                 />                 
         </View>
         <View style={styles.timersContainer}>
-          <View style={styles.timersRow}>
+          <View style={styles.timersRow}>          
             <TimerButton 
-              time='5:00'
+              time={'5:00'}
               navigate = {navigate}
             />
             <TimerButton 
@@ -95,3 +99,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+export default Home;

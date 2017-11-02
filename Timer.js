@@ -1,12 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
+import {observer, inject} from 'mobx-react/native'
 
-export default class TimerButton extends React.Component {
+
+@inject('store')
+
+@observer
+class TimerButton extends React.Component {
   render() {
     return (
       <View>
         <Text>
-          TIMER
+        { this.props.store.time }
         </Text>
       </View>
     );
@@ -16,3 +21,5 @@ export default class TimerButton extends React.Component {
 const styles = StyleSheet.create({
 
 });
+
+export default TimerButton;
