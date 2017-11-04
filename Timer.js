@@ -10,16 +10,28 @@ class TimerButton extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.black}>
-          <Text>
-          { this.props.store.timeMinutes.black }
-          </Text>
-        </View>
-        <View style={styles.white}>
-          <Text>
-          { this.props.store.timeMinutes.white }
-          </Text>
-        </View>
+        <TouchableOpacity style={styles.blackContainer}
+        onPress={() => {
+          console.log('black');
+        }}
+        >
+          <View>
+            <Text style={[styles.timerText, styles.white, styles.textUpsideDown]}>
+            { this.props.store.timeMinutes.black }
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.whiteContainer}
+        onPress={() => {
+          console.log('white');
+        }}
+        >
+          <View>
+            <Text style={[styles.timerText, styles.black]}>
+            { this.props.store.timeMinutes.white }
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -30,19 +42,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F3EFF5',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
-  black: {
+  blackContainer: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: 'red',
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#232021'
+  },
+  whiteContainer: {
+    flex: 1,
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F3EFF5'
+  },
+  timerText: {
+    fontSize: 80,
+    fontWeight: 'bold'
+  },
+  textUpsideDown: {
+    transform: [{ rotate: '180deg'}]
   },
   white: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'red',
-    alignSelf: 'stretch'
+    color: '#F3EFF5'
+  },
+  black: {
+    color: '#232021'
   }
 });
 
