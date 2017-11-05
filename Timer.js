@@ -8,13 +8,14 @@ import {observer, inject} from 'mobx-react/native'
 @observer
 class TimerButton extends React.Component {
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
         <TouchableOpacity id="blackContainer" 
         style={styles.blackContainer}
         onPress={() => {
           this.props.store.swapTimers('black');
-          console.log(!this.props.store.timers.black);
         }}
         disabled={ !this.props.store.timers.black }
         >
@@ -25,16 +26,32 @@ class TimerButton extends React.Component {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.startButton}
-        onPress={() => {
-          this.props.store.runWhiteTimer();
-        }}
-        color='#72B01D'
-        >
-          <Text style={styles.startButtonText}>
-            START
-          </Text>
+        { !this.props.store.gameInProgress && 
+          <TouchableOpacity style={styles.startButton}
+          onPress={() => {
+            this.props.store.runWhiteTimer();
+          }}
+          color='#72B01D'
+          >
+            <Text style={styles.startButtonText}>
+              START
+            </Text>
         </TouchableOpacity>
+        }
+
+        { this.props.store.gameInProgress && 
+          <TouchableOpacity style={styles.startButton}
+          onPress={() => {
+            this.props.store.clearGame();
+            navigate('Home');
+          }}
+          color='#72B01D'
+          >
+            <Text style={styles.startButtonText}>
+              BACK TO MENU
+            </Text>
+        </TouchableOpacity>
+        }
 
         <TouchableOpacity id="whiteContainer"
         style={styles.whiteContainer}

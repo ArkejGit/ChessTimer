@@ -1,18 +1,29 @@
 import {observable, computed, action} from 'mobx';
 
 class ChessTimerStore {
+
+	// game -------------------------
+	@observable gameInProgress = false;
+
+	get gameInProgress() {
+		return this.gameInProgress;
+	}
+
+	@action clearGame() {
+		this.setTime(0);
+		this.clearTimers();
+		this.gameInProgress = false;
+	}
+
+	// time -----------------------
 	@observable time={
 		white: 0,
 		black: 0
 	};
 
-	@observable timers={
-		white: false,
-		black: false
-	};
-
-	get timers() {
-		return this.timers;
+	@action setTime(time) {
+		this.time.white = time;
+		this.time.black = time;
 	}
 
 	@computed get timeMinutes() {
@@ -25,12 +36,29 @@ class ChessTimerStore {
 		}
 	}
 
-	@action setTime(time) {
-		this.time.white = time;
-		this.time.black = time;
+	// timers ------------------------------
+	@observable timers={
+		white: false,
+		black: false
+	};
+
+	get timers() {
+		return this.timers;
 	}
 
+	@action clearTimers() {
+		if (this.timers.white) {
+			clearInterval(this.timers.white);
+			this.timers.white = false;
+		} else if (this.timers.black) {
+			clearInterval(this.timers.black);
+			this.timers.black = false;
+		}
+
+	}	
+
 	@action runWhiteTimer() {
+		this.gameInProgress = true;
 		this.timers.white = setInterval(() => {
 			if (this.time.white > 0) {
 				this.time.white--;
