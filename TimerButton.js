@@ -23,13 +23,15 @@ export class TimerButton extends React.Component {
     );
   }
 }
-
+  
 export class CustomTimerButton extends React.Component {
   render() {
     return (
       <View style={styles.timer}>
         <TouchableOpacity 
-          style={[styles.timerButton, styles.customTimerButton]}>
+          style={[styles.timerButton, styles.customTimerButton]}
+          onPress={this.props.showModal}
+          >
           <Text style={styles.timerButtonText}>
           {this.props.time}
           </Text>

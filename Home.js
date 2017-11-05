@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Modal, TouchableHighlight } from 'react-native';
 import { TimerButton, CustomTimerButton } from './TimerButton';
 import {observer, inject} from 'mobx-react/native'
+import CustomTimerModal from './CustomTimerModal';
 
 @inject('store')
 
@@ -15,6 +16,15 @@ class Home extends React.Component {
       height: 25
     }
   }
+
+  state = {
+    modalVisible: false,
+  }
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
 
   render() {
     const { navigate } = this.props.navigation;
@@ -61,16 +71,20 @@ class Home extends React.Component {
           <View style={styles.timersRow}>
             <CustomTimerButton 
               time='Custom Timer'
+              showModal={() => { this.setModalVisible(true) }}
             />
           </View>
         </View>
+
+        <CustomTimerModal
+          modalVisible = { this.state.modalVisible }
+          hideModal={() => { this.setModalVisible(false) }}
+          navigate = {navigate}
+        />
+
       </View>
     );
   }
-}
-
-const test = () => {
-  console.log('test');
 }
 
 const styles = StyleSheet.create({
