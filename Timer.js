@@ -22,13 +22,16 @@ class TimerButton extends React.Component {
           </View>
         </TouchableOpacity>
 
-        <Button
+        <TouchableOpacity style={styles.startButton}
         onPress={() => {
           this.props.store.runWhiteTimer();
         }}
-        title="START"
+        color='#72B01D'
         >
-        </Button>
+          <Text style={styles.startButtonText}>
+            START
+          </Text>
+        </TouchableOpacity>
 
         <TouchableOpacity style={styles.whiteContainer}
         onPress={ () => {
@@ -79,6 +82,21 @@ const styles = StyleSheet.create({
   },
   black: {
     color: '#232021'
+  },
+  startButton: {
+    backgroundColor: '#72B01D',
+    zIndex: 10,
+    borderRadius: 2,
+    elevation: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    transform: [{ translateY: -25 }]
+  },
+  startButtonText: {
+    color: '#F3EFF5',
+    fontSize: 20,
+    fontWeight: '800',
+    padding: 10
   }
 });
 
