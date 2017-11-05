@@ -40,7 +40,7 @@ export class CustomTimerButton extends React.Component {
 }
 
 const getMinutes = (time) => {
-  return `${parseInt(time/60) ? parseInt(time/60) : '0'}:${time%60 < 10 ? time%60 + '0' : time%60}`;
+  return `${parseInt(time/60) ? parseInt(time/60) : '0'}:${time%60 < 10 ? '0' + time%60 : time%60}`;
 }
 
 const styles = StyleSheet.create({
