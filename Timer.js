@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Button} from 'react-native';
 import {observer, inject} from 'mobx-react/native'
 
 
@@ -12,7 +12,7 @@ class TimerButton extends React.Component {
       <View style={styles.container}>
         <TouchableOpacity style={styles.blackContainer}
         onPress={() => {
-          console.log('black');
+          this.props.store.swapTimers('black');
         }}
         >
           <View>
@@ -21,9 +21,18 @@ class TimerButton extends React.Component {
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.whiteContainer}
+
+        <Button
         onPress={() => {
-          console.log('white');
+          this.props.store.runWhiteTimer();
+        }}
+        title="START"
+        >
+        </Button>
+
+        <TouchableOpacity style={styles.whiteContainer}
+        onPress={ () => {
+          this.props.store.swapTimers('white');
         }}
         >
           <View>
