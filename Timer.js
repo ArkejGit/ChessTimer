@@ -10,10 +10,13 @@ class TimerButton extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.blackContainer}
+        <TouchableOpacity id="blackContainer" 
+        style={styles.blackContainer}
         onPress={() => {
           this.props.store.swapTimers('black');
+          console.log(!this.props.store.timers.black);
         }}
+        disabled={ !this.props.store.timers.black }
         >
           <View>
             <Text style={[styles.timerText, styles.white, styles.textUpsideDown]}>
@@ -33,10 +36,12 @@ class TimerButton extends React.Component {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.whiteContainer}
+        <TouchableOpacity id="whiteContainer"
+        style={styles.whiteContainer}
         onPress={ () => {
           this.props.store.swapTimers('white');
         }}
+        disabled={ !this.props.store.timers.white }
         >
           <View>
             <Text style={[styles.timerText, styles.black]}>

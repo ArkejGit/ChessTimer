@@ -7,9 +7,13 @@ class ChessTimerStore {
 	};
 
 	@observable timers={
-		white: null,
-		black: null
+		white: false,
+		black: false
 	};
+
+	get timers() {
+		return this.timers;
+	}
 
 	@computed get timeMinutes() {
 		let white = this.time.white;
@@ -49,9 +53,9 @@ class ChessTimerStore {
 	}
 
 	@action swapTimers(player) {
-		if (this.timers[player] === null) return; //prevent action if it's not player's turn
+		if (this.timers[player] === false) return; //prevent action if it's not player's turn
 		clearInterval(this.timers[player]);
-		this.timers[player] = null;
+		this.timers[player] = false;
 		player === 'white' ? this.runBlackTimer() : this.runWhiteTimer();
 	}
 }
