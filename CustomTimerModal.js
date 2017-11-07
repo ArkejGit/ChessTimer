@@ -4,13 +4,14 @@ import {observer, inject} from 'mobx-react/native'
 
 @inject('store')
 
+@observer
 class CustomTimerModal extends React.Component {
 
 	state = {
-		hours: '',
-		minutes: '',
-		seconds: '',
-	}
+			hours: '',
+			minutes: '',
+			seconds: '',
+		}
 
 	inputs = {
 			minutes: null,
@@ -23,8 +24,10 @@ class CustomTimerModal extends React.Component {
 	      animationType="slide"
 	      transparent={false}
 	      visible={this.props.modalVisible}
-	      onRequestClose={this.props.hideModal}
-	      >
+	      onRequestClose={ () => {
+	      	this.setState({ hours: '', minutes: '', seconds: ''});
+	      	this.props.store.hideModal() 
+	      }}>
 	     <View style={styles.outerContainer}>
 	      <View style={styles.innerContainer}>
 	      	<View style={styles.header}>
@@ -66,13 +69,22 @@ class CustomTimerModal extends React.Component {
 			</View>
 			<View style={styles.buttons}>
 				<TouchableOpacity style={styles.modalButton}
-				onPress={this.props.hideModal}>
+				onPress={() => {
+			      	this.setState({ hours: '', minutes: '', seconds: ''});
+			      	this.props.store.hideModal();
+			      }}>
 					<Text style={styles.modalButtonText}>
 						Back
 					</Text>
 				</TouchableOpacity>
 				<TouchableOpacity style={[styles.modalButton, styles.modalButtonPrimary]}
-				onPress={this.props.hideModal}>
+				onPress={() => {
+		            let time = Number(this.state.hours) * 3600 + Number(this.state.minutes) * 60 + Number(this.state.seconds);
+		            this.setState({ hours: '', minutes: '', seconds: ''});
+			      	this.props.store.hideModal();
+			      	this.props.store.setTime(time);
+		            this.props.navigate('Timer');
+		          }}>
 					<Text style={styles.modalButtonText}>
 						Play
 					</Text>

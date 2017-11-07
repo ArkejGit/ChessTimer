@@ -86,6 +86,21 @@ class ChessTimerStore {
 		this.timers[player] = false;
 		player === 'white' ? this.runBlackTimer() : this.runWhiteTimer();
 	}
+
+	// modal ------------------------------
+	@observable modalVisible = false;
+
+	get modalVisible() {
+		return this.modalVisible;
+	}
+
+	@action showModal() {
+		this.modalVisible = true;
+	}
+
+	@action hideModal() {
+		this.modalVisible = false;
+	}
 }
 
 const store = new ChessTimerStore()

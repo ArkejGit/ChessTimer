@@ -17,15 +17,6 @@ class Home extends React.Component {
     }
   }
 
-  state = {
-    modalVisible: false,
-  }
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
-
-
   render() {
     const { navigate } = this.props.navigation;
     
@@ -71,14 +62,13 @@ class Home extends React.Component {
           <View style={styles.timersRow}>
             <CustomTimerButton 
               time='Custom Timer'
-              showModal={() => { this.setModalVisible(true) }}
+              showModal={ () => this.props.store.showModal() }
             />
           </View>
         </View>
 
         <CustomTimerModal
-          modalVisible = { this.state.modalVisible }
-          hideModal={() => { this.setModalVisible(false) }}
+          modalVisible = { this.props.store.modalVisible }
           navigate = {navigate}
         />
 
