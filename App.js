@@ -10,6 +10,8 @@ const Router = StackNavigator({
   Timer: {screen: Timer}
 })
 
+Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
+
 class App extends React.Component {
   render() {
     return(
