@@ -10,11 +10,11 @@ import CustomTimerModal from './CustomTimerModal';
 class Home extends React.Component {
 
   static navigationOptions = {
-    //header: null,
      headerStyle: {
       backgroundColor: '#72B01D',
       height: 25
-    }
+    },
+    headerLeft: null
   }
 
   render() {

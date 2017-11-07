@@ -9,7 +9,8 @@ import {observer, inject} from 'mobx-react/native'
 class TimerButton extends React.Component {
 
   static navigationOptions = {
-    header: null
+    header: null,
+    headerLeft: null
   }
 
   render() {
