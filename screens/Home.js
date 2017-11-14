@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Modal, TouchableHighlight } from 'react-native';
-import { TimerButton, CustomTimerButton } from './TimerButton';
+import { TimerButton, CustomTimerButton } from '../components/TimerButton';
 import {observer, inject} from 'mobx-react/native'
-import CustomTimerModal from './CustomTimerModal';
+import CustomTimerModal from '../components/CustomTimerModal';
 
 @inject('store')
 
@@ -23,7 +23,7 @@ class Home extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.menu}>
-          <Image source={require('./img/chess-timer-logo.png')}
+          <Image source={require('../img/chess-timer-logo.png')}
                  style={styles.logo} 
                  resizeMode={'contain'}
                  />                 

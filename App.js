@@ -1,9 +1,9 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import Home from './Home';
-import Timer from './Timer';
-import store from './ChessTimerStore';
-import { Provider } from "mobx-react";
+import Home from './screens/Home';
+import Timer from './screens/Timer';
+import store from './store/ChessTimerStore';
+import { Provider } from 'mobx-react';
 
 const Router = StackNavigator({
   Home: {screen: Home},
