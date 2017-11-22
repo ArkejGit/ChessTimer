@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Button, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Button, Dimensions, Vibration } from 'react-native';
 import {observer, inject} from 'mobx-react/native'
-
-
 @inject('store')
 
 @observer
@@ -13,13 +11,23 @@ class TimerButton extends React.Component {
     headerLeft: null
   }
 
+  constructor(props) {
+    super(props);
+    this.state = { 
+      confirmExitButton: false,
+      blink: {show: true, counter: 0}
+    };
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     const winWidth = Dimensions.get('window').width;
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity id="blackContainer" 
+
+        {/* black container ---------------------------------- */}
+        <TouchableOpacity
         style={styles.blackContainer}
         onPress={() => {
           this.props.store.swapTimers('black');
@@ -33,34 +41,36 @@ class TimerButton extends React.Component {
           </View>
         </TouchableOpacity>
 
+        {/* buttons ------------------------------------------------- */}
         <View style={[styles.buttons, {width: winWidth}]}>
         { !this.props.store.gameInProgress && 
-          <TouchableOpacity style={styles.startButton}
+          <TouchableOpacity style={styles.timerButton}
           onPress={() => {
             this.props.store.runWhiteTimer();
           }}
           color='#72B01D'
           >
-            <Text style={styles.startButtonText}>
+            <Text style={styles.timerButtonText}>
               START
             </Text>
         </TouchableOpacity>
         }
 
-        <TouchableOpacity style={styles.startButton}
-        onPress={() => {
-          navigate('Home');
-          this.props.store.clearGame();
-        }}
+        <TouchableOpacity style={styles.timerButton}
+        onPress={() => this.handleClickBackButton(navigate)}
         color='#72B01D'
-        >
-          <Text style={styles.startButtonText}>
-            BACK TO MENU
+        >  
+          { this.state.blink.show &&
+          <Text style={styles.timerButtonText}>
+            { this.state.confirmExitButton ? 'ARE YOU SURE?' : 'BACK TO MENU'}
           </Text>
+          }
         </TouchableOpacity>
+
         </View>
 
-        <TouchableOpacity id="whiteContainer"
+        {/* white container ---------------------------------- */}
+        <TouchableOpacity
         style={styles.whiteContainer}
         onPress={ () => {
           this.props.store.swapTimers('white');
@@ -76,6 +86,42 @@ class TimerButton extends React.Component {
       </View>
     );
   }
+
+  // handleClickBackButton ---------------------------------------------------------
+  handleClickBackButton(navigate) {
+    if (this.props.store.gameInProgress && !this.state.confirmExitButton) {
+    Vibration.vibrate(500);
+
+    this.confirmExitButtonInterval = setInterval(() => {
+      if (this.state.blink.counter > 3) {
+        this.setState({
+          confirmExitButton: false,
+          blink: {show: true, counter: 0}
+        });
+        clearInterval(this.confirmExitButtonInterval);
+        return;
+      }
+
+      this.setState(previousState => {
+        return { 
+          blink: {show: !previousState.blink.show, counter: ++previousState.blink.counter},
+        };
+      });
+    }, 1000);
+
+    this.setState(previousState => {
+      return { 
+        confirmExitButton: !previousState.confirmExitButton,
+       };
+    });
+    return;
+  }
+
+  clearInterval(this.confirmExitButtonInterval);
+  navigate('Home');
+  this.props.store.clearGame();
+  }
+
 }
 
 const styles = StyleSheet.create({
@@ -120,14 +166,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around'
   },
-  startButton: {
+  timerButton: {
     backgroundColor: '#72B01D',
     borderRadius: 2,
     elevation: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  startButtonText: {
+  timerButtonText: {
     color: '#F3EFF5',
     fontSize: 20,
     fontWeight: '800',
