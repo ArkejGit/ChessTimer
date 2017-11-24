@@ -33,7 +33,7 @@ class Timer extends React.Component {
         onPress={() => {
           this.props.store.swapTimers('black');
         }}
-        disabled={ !this.props.store.timers.black }
+        disabled={ !this.props.store.timers.black ||!this.props.store.gameInProgress }
         >
           <View>
             <Text style={[styles.timerText, styles.white, styles.textUpsideDown]}>
@@ -77,7 +77,7 @@ class Timer extends React.Component {
         onPress={ () => {
           this.props.store.swapTimers('white');
         }}
-        disabled={ !this.props.store.timers.white }
+        disabled={ !this.props.store.timers.white || !this.props.store.gameInProgress }
         >
           <View>
             <Text style={[styles.timerText, styles.black]}>

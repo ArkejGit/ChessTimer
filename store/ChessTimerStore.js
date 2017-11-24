@@ -65,6 +65,7 @@ class ChessTimerStore {
 			} else {
 				console.log('Black won!');
 				clearInterval(this.timers.white);
+				this.gameInProgress = false;
 			}
 		}, 1000);
 	}
@@ -76,6 +77,7 @@ class ChessTimerStore {
 			} else {
 				console.log('White won!');
 				clearInterval(this.timers.black);
+				this.gameInProgress = false;
 			}
 		}, 1000);
 	}
