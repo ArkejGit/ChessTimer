@@ -15,6 +15,16 @@ class ChessTimerStore {
 		this.gameInProgress = false;
 	}
 
+	@observable winner = null;
+
+	@action setWinner(winner) {
+		this.winner = winner;
+	}
+
+	get winner() {
+		return this.winner;
+	}
+
 	// time -----------------------
 	@observable time={
 		white: 0,
@@ -66,6 +76,7 @@ class ChessTimerStore {
 				console.log('Black won!');
 				clearInterval(this.timers.white);
 				this.gameInProgress = false;
+				this.winner = 'black';
 			}
 		}, 1000);
 	}
@@ -78,6 +89,7 @@ class ChessTimerStore {
 				console.log('White won!');
 				clearInterval(this.timers.black);
 				this.gameInProgress = false;
+				this.winner = 'white';
 			}
 		}, 1000);
 	}
