@@ -4,7 +4,7 @@ import {observer, inject} from 'mobx-react/native'
 @inject('store')
 
 @observer
-class TimerButton extends React.Component {
+class Timer extends React.Component {
 
   static navigationOptions = {
     header: null,
@@ -22,6 +22,7 @@ class TimerButton extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const winWidth = Dimensions.get('window').width;
+    const winHeight = Dimensions.get('window').height;
 
     return (
       <View style={styles.container}>
@@ -43,28 +44,28 @@ class TimerButton extends React.Component {
 
         {/* buttons ------------------------------------------------- */}
         <View style={[styles.buttons, {width: winWidth}]}>
+
         { !this.props.store.gameInProgress && 
-          <TouchableOpacity style={styles.timerButton}
+          <TouchableOpacity style={[styles.timerButton, {height: 70, width: winWidth/2-30}]}
           onPress={() => {
             this.props.store.runWhiteTimer();
           }}
           color='#72B01D'
           >
-            <Text style={styles.timerButtonText}>
+            <Text style={[styles.timerButtonText, {fontSize: winWidth/22}]}>
               START
             </Text>
         </TouchableOpacity>
         }
 
-        <TouchableOpacity style={styles.timerButton}
+        <TouchableOpacity style={[styles.timerButton, {height: 70, width: winWidth/2-30}]}
         onPress={() => this.handleClickBackButton(navigate)}
         color='#72B01D'
-        >  
-          { this.state.blink.show &&
-          <Text style={styles.timerButtonText}>
-            { this.state.confirmExitButton ? 'ARE YOU SURE?' : 'BACK TO MENU'}
+        >
+          <Text style={[styles.timerButtonText, {fontSize: winWidth/22}]}>
+            { this.state.blink.show &&
+              (this.state.confirmExitButton ? 'ARE YOU SURE?' : 'BACK TO MENU')}
           </Text>
-          }
         </TouchableOpacity>
 
         </View>
@@ -175,10 +176,8 @@ const styles = StyleSheet.create({
   },
   timerButtonText: {
     color: '#F3EFF5',
-    fontSize: 20,
-    fontWeight: '800',
-    padding: 10
+    fontWeight: '800'
   }
 });
 
-export default TimerButton;
+export default Timer;
