@@ -48,6 +48,7 @@ class Timer extends React.Component {
         { !this.props.store.gameInProgress && 
           <TouchableOpacity style={[styles.timerButton, {height: 70, width: winWidth/2-30}]}
           onPress={() => {
+            Vibration.vibrate(500);
             this.props.store.runWhiteTimer();
           }}
           color='#72B01D'
