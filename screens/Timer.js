@@ -33,19 +33,23 @@ class Timer extends React.Component {
         onPress={() => {
           this.props.store.swapTimers('black');
         }}
-        disabled={ !this.props.store.timers.black ||!this.props.store.gameInProgress }
+        disabled={ !this.props.store.timers.black || !this.props.store.gameInProgress }
         >
           <View>
-            <Text style={[styles.timerText, styles.white, styles.textUpsideDown]}>
-            { this.props.store.timeMinutes.black }
+            <Text style={[styles.timerTextSmall, styles.white, styles.textUpsideDown]}>
+              { this.props.store.winner ? this.props.store.winner.toUpperCase() + ' WON' : ''}
             </Text>
+            <Text style={[styles.timerText, styles.white, styles.textUpsideDown]}>
+              { this.props.store.timeMinutes.black }
+            </Text>            
           </View>
         </TouchableOpacity>
 
         {/* buttons ------------------------------------------------- */}
         <View style={[styles.buttons, {width: winWidth}]}>
 
-        { !this.props.store.gameInProgress && 
+          {/* start button ------------------------------------------------- */}
+        { (!this.props.store.gameInProgress && !this.props.store.winner) && 
           <TouchableOpacity style={[styles.timerButton, {height: 70, width: winWidth/2-30}]}
           onPress={() => {
             Vibration.vibrate(500);
@@ -59,6 +63,7 @@ class Timer extends React.Component {
         </TouchableOpacity>
         }
 
+          {/* back to menu  button ------------------------------------------------- */}
         <TouchableOpacity style={[styles.timerButton, {height: 70, width: winWidth/2-30}]}
         onPress={() => this.handleClickBackButton(navigate)}
         color='#72B01D'
@@ -81,7 +86,10 @@ class Timer extends React.Component {
         >
           <View>
             <Text style={[styles.timerText, styles.black]}>
-            { this.props.store.timeMinutes.white }
+             { this.props.store.timeMinutes.white }
+            </Text>
+            <Text style={[styles.timerTextSmall, styles.black]}>
+             { this.props.store.winner ? this.props.store.winner.toUpperCase() + ' WON' : ''}
             </Text>
           </View>
         </TouchableOpacity>
@@ -122,6 +130,7 @@ class Timer extends React.Component {
   clearInterval(this.confirmExitButtonInterval);
   navigate('Home');
   this.props.store.clearGame();
+  this.props.store.setWinner(null);
   }
 
 }
@@ -138,6 +147,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
     backgroundColor: '#232021',
     zIndex: 1,
   },
@@ -146,10 +156,15 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
     backgroundColor: '#F3EFF5'
   },
   timerText: {
     fontSize: 80,
+    fontWeight: 'bold'
+  },
+  timerTextSmall: {
+    fontSize: 60,
     fontWeight: 'bold'
   },
   textUpsideDown: {
@@ -177,7 +192,8 @@ const styles = StyleSheet.create({
   },
   timerButtonText: {
     color: '#F3EFF5',
-    fontWeight: '800'
+    fontWeight: '800',
+    textAlign: 'center'
   }
 });
 
